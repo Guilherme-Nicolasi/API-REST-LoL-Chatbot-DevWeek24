@@ -34,8 +34,8 @@ public class ChampionsJdbcRepository implements ChampionsRepository{
     @Override
     public Optional<Champions> findById(Long id) {
         String sql = "SELECT * FROM CHAMPIONS WHERE ID = ?";
-        Champions champion = jdbcTemplate.queryForObject(sql, championsRowMapper, id);
-        return Optional.ofNullable(champion);
+        List<Champions> champion = jdbcTemplate.query(sql, championsRowMapper, id);
+        return champion.stream().findFirst();
     }
 
 }
